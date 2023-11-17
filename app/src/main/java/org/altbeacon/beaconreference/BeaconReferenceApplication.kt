@@ -21,24 +21,8 @@ class BeaconReferenceApplication: Application() {
         val beaconManager = BeaconManager.getInstanceForApplication(this)
         BeaconManager.setDebug(true)
 
-        // By default the AndroidBeaconLibrary will only find AltBeacons.  If you wish to make it
-        // find a different type of beacon, you must specify the byte layout for that beacon's
-        // advertisement with a line like below.  The example shows how to find a beacon with the
-        // same byte layout as AltBeacon but with a beaconTypeCode of 0xaabb.  To find the proper
-        // layout expression for other beacon types, do a web search for "setBeaconLayout"
-        // including the quotes.
-        //
-        //beaconManager.getBeaconParsers().clear();
-        //beaconManager.getBeaconParsers().add(new BeaconParser().
-        //        setBeaconLayout("m:0-1=4c00,i:2-24v,p:24-24"));
-
-
-        // By default the AndroidBeaconLibrary will only find AltBeacons.  If you wish to make it
-        // find a different type of beacon like Eddystone or iBeacon, you must specify the byte layout
-        // for that beacon's advertisement with a line like below.
-        //
         // If you don't care about AltBeacon, you can clear it from the defaults:
-        //beaconManager.getBeaconParsers().clear()
+        beaconManager.getBeaconParsers().clear()
 
         // Uncomment if you want to block the library from updating its distance model database
         //BeaconManager.setDistanceModelUpdateUrl("")
@@ -52,7 +36,7 @@ class BeaconReferenceApplication: Application() {
 
         // enabling debugging will send lots of verbose debug information from the library to Logcat
         // this is useful for troubleshooting problmes
-        // BeaconManager.setDebug(true)
+        BeaconManager.setDebug(true)
 
 
         // The BluetoothMedic code here, if included, will watch for problems with the bluetooth
