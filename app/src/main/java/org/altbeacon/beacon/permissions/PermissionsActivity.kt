@@ -20,16 +20,6 @@ import androidx.core.content.ContextCompat
 import androidx.core.view.setPadding
 
 
-
-
-
-
-
-
-
-
-
-
 open class PermissionsActivity: AppCompatActivity() {
 
     val requestPermissionsLauncher =
@@ -69,7 +59,7 @@ class PermissionsHelper(val context: Context) {
         return (ContextCompat.checkSelfPermission(context, permissionString) == PackageManager.PERMISSION_GRANTED)
     }
     fun setFirstTimeAskingPermission(permissionString: String, isFirstTime: Boolean) {
-        val sharedPreference = context.getSharedPreferences("org.altbeacon.permisisons",
+        val sharedPreference = context.getSharedPreferences("org.altbeacon.permissions",
             AppCompatActivity.MODE_PRIVATE
         )
         sharedPreference.edit().putBoolean(permissionString,
@@ -78,7 +68,7 @@ class PermissionsHelper(val context: Context) {
 
     fun isFirstTimeAskingPermission(permissionString: String): Boolean {
         val sharedPreference = context.getSharedPreferences(
-            "org.altbeacon.permisisons",
+            "org.altbeacon.permissions",
             AppCompatActivity.MODE_PRIVATE
         )
         return sharedPreference.getBoolean(
@@ -102,7 +92,7 @@ class PermissionsHelper(val context: Context) {
             // As of version S (12) we need FINE_LOCATION, BLUETOOTH_SCAN and BACKGROUND_LOCATION
             // Manifest.permission.BLUETOOTH_CONNECT is not absolutely required to do just scanning,
             // but it is required if you want to access some info from the scans like the device name
-            // and the aditional cost of requsting this access is minimal, so we just request it
+            // and the aditional cost of requesting this access is minimal, so we just request it
             permissions.add(arrayOf(Manifest.permission.BLUETOOTH_SCAN, Manifest.permission.BLUETOOTH_CONNECT))
         }
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
@@ -135,7 +125,7 @@ open class BeaconScanPermissionsActivity: PermissionsActivity()  {
         layout.orientation = LinearLayout.VERTICAL
         val backgroundAccessRequested = intent.getBooleanExtra("backgroundAccessRequested", true)
         val title = intent.getStringExtra("title") ?: "Permissions Needed"
-        val message = intent.getStringExtra("message") ?: "In order to scan for beacons, this app requrires the following permissions from the operating system.  Please tap each button to grant each required permission."
+        val message = intent.getStringExtra("message") ?: "In order to scan for beacons, this app requires the following permissions from the operating system.  Please tap each button to grant each required permission."
         val continueButtonTitle = intent.getStringExtra("continueButtonTitle") ?: "Continue"
         val permissionButtonTitles = intent.getBundleExtra("permissionBundleTitles") ?: getDefaultPermissionTitlesBundle()
 

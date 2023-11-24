@@ -22,7 +22,7 @@ class BeaconReferenceApplication: Application() {
         BeaconManager.setDebug(true)
 
         // If you don't care about AltBeacon, you can clear it from the defaults:
-        beaconManager.getBeaconParsers().clear()
+        //beaconManager.getBeaconParsers().clear()
 
         // Uncomment if you want to block the library from updating its distance model database
         //BeaconManager.setDistanceModelUpdateUrl("")
@@ -43,8 +43,8 @@ class BeaconReferenceApplication: Application() {
         // stack and optionally:
         // - power cycle bluetooth to recover on bluetooth problems
         // - periodically do a proactive scan or transmission to verify the bluetooth stack is OK
-        // BluetoothMedic.getInstance().legacyEnablePowerCycleOnFailures(this) // Android 4-12 only
-        // BluetoothMedic.getInstance().enablePeriodicTests(this, BluetoothMedic.SCAN_TEST + BluetoothMedic.TRANSMIT_TEST)
+         BluetoothMedic.getInstance().legacyEnablePowerCycleOnFailures(this) // Android 4-12 only
+         BluetoothMedic.getInstance().enablePeriodicTests(this, BluetoothMedic.SCAN_TEST + BluetoothMedic.TRANSMIT_TEST)
 
         setupBeaconScanning()
     }
@@ -69,13 +69,13 @@ class BeaconReferenceApplication: Application() {
             Log.d(TAG, "Not setting up foreground service scanning until location permission granted by user")
             return
         }
-        //beaconManager.setEnableScheduledScanJobs(false);
-        //beaconManager.setBackgroundBetweenScanPeriod(0);
-        //beaconManager.setBackgroundScanPeriod(1100);
+        beaconManager.setEnableScheduledScanJobs(false);
+        beaconManager.setBackgroundBetweenScanPeriod(0);
+        beaconManager.setBackgroundScanPeriod(1100);
 
         // Ranging callbacks will drop out if no beacons are detected
         // Monitoring callbacks will be delayed by up to 25 minutes on region exit
-        // beaconManager.setIntentScanningStrategyEnabled(true)
+         beaconManager.setIntentScanningStrategyEnabled(true)
 
         // The code below will start "monitoring" for beacons matching the region definition at the top of this file
         beaconManager.startMonitoring(region)
